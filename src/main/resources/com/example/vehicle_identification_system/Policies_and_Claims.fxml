@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1269.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vehicle_identification_system.PoliciesAndClaims">
+   <children>
+      <ImageView fx:id="PCimagebackground" fitHeight="700.0" fitWidth="1269.0" pickOnBounds="true">
+         <image>
+            <Image url="@amg.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="PCClaimCart" layoutX="32.0" layoutY="43.0" opacity="0.87" prefHeight="600.0" prefWidth="578.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 16px; -fx-border-color: green; -fx-border-radius: 16px;">
+         <children>
+            <TextField fx:id="PCtxtClaimID" layoutX="51.0" layoutY="147.0" prefHeight="37.0" prefWidth="476.0" promptText="Enter claim ID" />
+            <TextField fx:id="PCtxtamount" layoutX="49.0" layoutY="425.0" prefHeight="37.0" prefWidth="476.0" promptText="0.00" />
+            <Label fx:id="PClblHeader" layoutX="220.0" layoutY="14.0" text="Claim" textFill="WHITE">
+               <font>
+                  <Font size="64.0" />
+               </font>
+            </Label>
+            <Label fx:id="PClblClaimId" layoutX="51.0" layoutY="116.0" text="Claim ID" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="PClblAmount" layoutX="49.0" layoutY="395.0" text="Amount" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="PClblDate" layoutX="49.0" layoutY="331.0" text="Date" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="PCTxtDate" layoutX="49.0" layoutY="365.0" prefHeight="30.0" prefWidth="189.0" promptText="Date e.g 15/07/2026" />
+            <Button fx:id="PCbtnMakeclaim" layoutX="186.0" layoutY="523.0" mnemonicParsing="false" onAction="#onclickmakeclaim" prefHeight="37.0" prefWidth="207.0" style="-fx-background-color: green;" text="Make Claim" textFill="#efecec">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <TextField fx:id="PCtxtpolicyNumber" layoutX="49.0" layoutY="297.0" prefHeight="37.0" prefWidth="476.0" promptText="Policy Number" />
+            <Label fx:id="PClblpolicyNumber" layoutX="49.0" layoutY="267.0" text="Policy Number" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="PCtxtVehiclenumber" layoutX="52.0" layoutY="230.0" prefHeight="37.0" prefWidth="476.0" promptText="Vehicle Number" />
+            <Label fx:id="PClblvehicleNumber" layoutX="52.0" layoutY="199.0" text="Vehicle Number" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="PCpolicyCart" layoutX="656.0" layoutY="43.0" opacity="0.87" prefHeight="600.0" prefWidth="578.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 16px; -fx-border-radius: 16; -fx-border-color: green;">
+         <children>
+            <TextField fx:id="PCtxtpolicynumber" layoutX="51.0" layoutY="137.0" prefHeight="30.0" prefWidth="476.0" promptText="Enter policy number" />
+            <TextField fx:id="PCtxtinsurancecompany" layoutX="49.0" layoutY="263.0" prefHeight="37.0" prefWidth="476.0" promptText="Insurance Company" />
+            <Label fx:id="PClblPolicy" layoutX="220.0" layoutY="14.0" text="Policy" textFill="WHITE">
+               <font>
+                  <Font size="64.0" />
+               </font>
+            </Label>
+            <Label fx:id="PClblpolicyNumber" layoutX="51.0" layoutY="107.0" text="Policy Number" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="PClblInsuranceCompany" layoutX="49.0" layoutY="233.0" text="Insurence Company" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="PClblStartDate" layoutX="44.0" layoutY="375.0" text="Start Date" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="PCtxtStartDateP" layoutX="44.0" layoutY="399.0" prefHeight="20.0" prefWidth="189.0" promptText="Start Date" />
+            <Button fx:id="PCbtnAddpolicy" layoutX="216.0" layoutY="537.0" mnemonicParsing="false" onAction="#onclickAddpolicy" prefHeight="39.0" prefWidth="175.0" style="-fx-background-color: green;" text="Add Policy" textFill="#f4eded">
+               <font>
+                  <Font name="Arial Black" size="19.0" />
+               </font>
+            </Button>
+            <DatePicker fx:id="PCtxtEndDateP" layoutX="44.0" layoutY="455.0" prefHeight="12.0" prefWidth="189.0" promptText="End Date" />
+            <Label fx:id="PClblEndDate" layoutX="44.0" layoutY="431.0" text="End Date" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="PClblcoverageDeatials" layoutX="50.0" layoutY="300.0" text="Coverage Details" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="PCtxtCoverageDetails" layoutX="49.0" layoutY="335.0" prefHeight="25.0" prefWidth="476.0" promptText="Covarage Details" />
+            <TextField fx:id="PCtxtVehicleNumber" layoutX="49.0" layoutY="203.0" prefHeight="30.0" prefWidth="476.0" promptText="Enter vehicle number" />
+            <Label fx:id="PClblVehicleNumner2" layoutX="49.0" layoutY="173.0" text="Vehicle Number" textFill="#f4f4f4">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="PCbtnback" layoutX="43.0" layoutY="649.0" mnemonicParsing="false" onAction="#onclickBack" prefHeight="39.0" prefWidth="130.0" style="-fx-background-color: green;" text="Back" textFill="#efecec">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Label fx:id="PClblClaimStatus" layoutX="289.0" layoutY="650.0" text="Status:" textFill="#edeaea">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="PClblpolicyStatus" layoutX="883.0" layoutY="650.0" text="Status:" textFill="#edeaea">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

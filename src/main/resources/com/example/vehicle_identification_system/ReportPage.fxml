@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vehicle_identification_system.ReportPage">
+   <children>
+      <ScrollPane fx:id="mainScrollPane" layoutX="99.0" layoutY="88.0" prefHeight="800.0" prefWidth="1270.0" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <Pane fx:id="root" prefHeight="900.0" prefWidth="1270.0" style="-fx-background-color: linear-gradient(to right, #050608, #0B4F00);;">
+               <children>
+                  <Pane fx:id="RPsidenavigation" prefHeight="800.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green;">
+                     <children>
+                        <Label fx:id="RPlblvehicleidentification" layoutX="14.0" layoutY="14.0" text="Vehicle Idefication" textFill="#e4dede">
+                           <font>
+                              <Font name="Ebrima Bold" size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="RPlblSystem" layoutX="17.0" layoutY="38.0" text="System" textFill="#e4dede">
+                           <font>
+                              <Font name="Ebrima Bold" size="19.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="RPbtnmainDashboard" layoutX="11.0" layoutY="87.0" mnemonicParsing="false" onAction="#onclickDashboardRP" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Main Dashboard" textFill="#f4ebeb">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font>
+                           <effect>
+                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                                 <color>
+                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="RPbtnreports" layoutX="11.0" layoutY="142.0" mnemonicParsing="false" onAction="#onclickReportsRP" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Reports" textFill="#f4ebeb">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font>
+                           <effect>
+                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                                 <color>
+                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="RPbtnviolation" layoutX="11.0" layoutY="196.0" mnemonicParsing="false" onAction="#onclickViolationRP" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Violation" textFill="#f4ebeb">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font>
+                           <effect>
+                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                                 <color>
+                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                        <Button fx:id="RPbtnlogoutRP" layoutX="11.0" layoutY="252.0" mnemonicParsing="false" onAction="#onclicklogoutRP" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Log Out" textFill="#f4ebeb">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font>
+                           <effect>
+                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                                 <color>
+                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
+                        <Pane fx:id="RPcustomerCart" layoutX="14.0" layoutY="632.0" prefHeight="136.0" prefWidth="166.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
+                           <children>
+                              <Button fx:id="RPbtnCustomerSupport" layoutX="9.0" layoutY="75.0" mnemonicParsing="false" onAction="#onclickCustomerSupportRP" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5; -fx-background-radius: 5;" text="Customer Chat" textFill="#f4ebeb">
+                                 <font>
+                                    <Font name="Arial Black" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow height="3.48" radius="0.37" width="0.0">
+                                       <color>
+                                          <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                       </color>
+                                    </DropShadow>
+                                 </effect>
+                              </Button>
+                              <Label fx:id="RPlblcustomer" layoutX="9.0" layoutY="14.0" text="Customer contact" textFill="#f6f2f2">
+                                 <font>
+                                    <Font name="Arial Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="RPlblWeareheretoassityou" layoutX="9.0" layoutY="41.0" text="We are here to assist you" textFill="#f6f2f2">
+                                 <font>
+                                    <Font name="Arial" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="RPtxtSearch" layoutX="443.0" layoutY="15.0" prefHeight="39.0" prefWidth="507.0" promptText="🔍 Search make, model,prices" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 10; -fx-border-color: green; -fx-border-radius: 10;">
+                     <font>
+                        <Font name="Arial Black" size="17.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="RPlblReports" layoutX="213.0" layoutY="69.0" prefHeight="73.0" prefWidth="390.0" text="Reports" textFill="#f4f1f1">
+                     <font>
+                        <Font name="Arial Black" size="46.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="RProleCart" layoutX="1041.0" layoutY="15.0" prefHeight="53.0" prefWidth="157.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
+                     <children>
+                        <Label fx:id="RPlblname" layoutX="9.0" layoutY="4.0" prefHeight="20.0" prefWidth="134.0" text="name" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="RPlblroleCustomer" layoutX="9.0" layoutY="29.0" prefHeight="20.0" prefWidth="134.0" text="Customer" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <TableView fx:id="RPtableview" layoutX="213.0" layoutY="490.0" prefHeight="309.0" prefWidth="994.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);">
+                     <columns>
+                        <TableColumn fx:id="RPcolumnid" prefWidth="36.666656494140625" style="-fx-background-color: green;" text="#" />
+                        <TableColumn fx:id="RPcolumnreportnumber" prefWidth="188.6666717529297" style="-fx-background-color: green;" text="Report Number" />
+                        <TableColumn fx:id="RPcolumnreporttype" prefWidth="153.3333740234375" style="-fx-background-color: green;" text="Report type" />
+                        <TableColumn fx:id="RPcolumnreportdate" prefWidth="122.66668701171875" style="-fx-background-color: green;" text="Report date" />
+                        <TableColumn fx:id="RPcolumnlocation" prefWidth="126.0" style="-fx-background-color: green;" text="Location" />
+                        <TableColumn fx:id="RPcolumnoffivername" prefWidth="130.6666259765625" style="-fx-background-color: green;" text="Officer name" />
+                        <TableColumn fx:id="RPcolumnstatus" prefWidth="105.33331298828125" style="-fx-background-color: green;" text="Status" />
+                        <TableColumn fx:id="RPcolumnAction" prefWidth="130.0" style="-fx-background-color: green;" text="Action" />
+                     </columns>
+                  </TableView>
+                  <ScrollBar fx:id="scrollbar" layoutX="1258.0" max="200.0" orientation="VERTICAL" prefHeight="800.0" prefWidth="15.0" visibleAmount="70.0" />
+                  <Pane fx:id="RPAllreportsCart" layoutX="213.0" layoutY="447.0" prefHeight="36.0" prefWidth="157.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
+                     <children>
+                        <Label fx:id="RPlblAllreports" layoutX="9.0" layoutY="4.0" prefHeight="20.0" prefWidth="134.0" text="All Reports" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="RPReportsPane" layoutX="213.0" layoutY="142.0" prefHeight="298.0" prefWidth="994.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
+                     <children>
+                        <Label fx:id="RPlblreporttype" layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="185.0" text="Report Type" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="RPtxtreporttype" layoutX="14.0" layoutY="50.0" prefHeight="36.0" prefWidth="255.0" promptText="Select report Type" />
+                        <Label fx:id="RPlblreportdate" layoutX="312.0" layoutY="14.0" prefHeight="20.0" prefWidth="185.0" text="Report Date" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="RPtxtDate" layoutX="312.0" layoutY="50.0" prefHeight="36.0" prefWidth="255.0" />
+                        <Label fx:id="RPlblReporttime" layoutX="14.0" layoutY="101.0" prefHeight="20.0" prefWidth="185.0" text="Report Time" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="RPtxtReorttime" layoutX="14.0" layoutY="137.0" prefHeight="36.0" prefWidth="255.0" promptText="Enter Report Time" />
+                        <Label fx:id="RPlbllocation" layoutX="312.0" layoutY="101.0" prefHeight="20.0" prefWidth="185.0" text="Location" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="RPtxtLocation" layoutX="312.0" layoutY="137.0" prefHeight="36.0" prefWidth="255.0" promptText="Enter Report Location" />
+                        <Label fx:id="RPlbltitleSummary" layoutX="598.0" layoutY="14.0" prefHeight="20.0" prefWidth="185.0" text="Title / summary" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="RPtxtTitleSummary" layoutX="604.0" layoutY="50.0" prefHeight="36.0" prefWidth="317.0" promptText="Enter Violation Amount" />
+                        <Label fx:id="RPlblofficerName" layoutX="14.0" layoutY="196.0" prefHeight="20.0" prefWidth="185.0" text="Officer name" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="RPtxtOfficername" layoutX="14.0" layoutY="232.0" prefHeight="36.0" prefWidth="255.0" promptText="Enter officer Name" />
+                        <Label fx:id="RPlblBadgeId" layoutX="312.0" layoutY="196.0" prefHeight="20.0" prefWidth="185.0" text="Badge ID" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="RPtxtBadgeID" layoutX="312.0" layoutY="232.0" prefHeight="36.0" prefWidth="255.0" promptText="Enter Badge ID" />
+                        <Label fx:id="RPlblDescription" layoutX="604.0" layoutY="101.0" prefHeight="20.0" prefWidth="185.0" text="Description" textFill="#f6f2f2">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="RPtxtDescription" alignment="TOP_LEFT" layoutX="598.0" layoutY="132.0" prefHeight="136.0" prefWidth="317.0" promptText="Describe the violation" />
+                     </children>
+                  </Pane>
+                  <Button fx:id="RPbtnAddreport" layoutX="443.0" layoutY="447.0" mnemonicParsing="false" onAction="#onclickAddreport" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: green;" text="Add Report" textFill="#f4e9e9">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="RPbtnReset" layoutX="603.0" layoutY="447.0" mnemonicParsing="false" onAction="#onclickRPReset" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: green;" text="Reset" textFill="#f4e9e9">
+                     <font>
+                        <Font name="Arial Black" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
