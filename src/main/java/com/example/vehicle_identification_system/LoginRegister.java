@@ -106,7 +106,11 @@ public class LoginRegister {
 
             int result = pstmt.executeUpdate();
             if (result > 0) {
-                showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "User registered successfully! Please login.");
+                // Create a Client object using polymorphism
+                Client newClient = new Client(username, email);
+                newClient.showUserInfo();
+                showAlert(Alert.AlertType.INFORMATION, "Registration Successful",
+                        "User registered successfully! Please login.\nUser Role: " + newClient.getRole());
                 clearRegisterFields();
             }
             pstmt.close();
@@ -130,43 +134,15 @@ public class LoginRegister {
             return;
         }
 
-        try (Connection conn = ConnectionDB.getConnection()) {
-            String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
+        User user = UserFactory.createUser(username, password);
 
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                loggedInUsername = username;
-                showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome " + username + "!");
-                rs.close();
-                pstmt.close();
-                navigateToCustomerPage(event, username);
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password!");
-                rs.close();
-                pstmt.close();
-            }
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Database error: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void navigateToCustomerPage(ActionEvent event, String username) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vehicle_identification_system/CustomerPage.fxml"));
-            Parent root = loader.load();
-            CustomerPage customerPage = loader.getController();
-            customerPage.setLoggedInUser(username);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Customer Dashboard");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Could not load customer page");
+        if (user != null) {
+            loggedInUsername = username;
+            showAlert(Alert.AlertType.INFORMATION, "Login Successful",
+                    "Welcome " + user.getFullName() + "!\nRole: " + user.getRole());
+            user.loadDashboard((Stage) ((Node) event.getSource()).getScene().getWindow(), username);
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password!");
         }
     }
 

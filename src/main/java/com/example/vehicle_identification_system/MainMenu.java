@@ -88,7 +88,7 @@ public class MainMenu {
                 "• Insurance Management\n" +
                 "• Police Reports and Violations\n" +
                 "• Customer Support\n\n" +
-                "© 2024 Vehicle Identification System");
+                "© 2025 Vehicle Identification System");
         alert.showAndWait();
     }
 

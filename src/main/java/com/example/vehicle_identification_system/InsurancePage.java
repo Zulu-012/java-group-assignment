@@ -163,17 +163,18 @@ public class InsurancePage {
 
     private String loggedInAgent = "";
     private ObservableList<InsuranceData> policiesList = FXCollections.observableArrayList();
+    private ObservableList<InsuranceData> allPoliciesList = FXCollections.observableArrayList();
 
     public void setLoggedInAgent(String username) {
         this.loggedInAgent = username;
         IPlblcustomername.setText(username);
         IPlblrole.setText("Insurance Agent");
         loadDashboardStats();
-        loadRecentPoliciesAndClaims();
+        loadAllPolicies();
     }
 
     private void loadDashboardStats() {
-        try (Connection conn = ConnectionDB.getInsuranceConnection()) {
+        try (Connection conn = ConnectionDB.getConnection()) {
             // Total Active Policies
             String activePoliciesSql = "SELECT COUNT(*) FROM InsurancePolicy WHERE end_date >= CURRENT_DATE";
             PreparedStatement pstmt = conn.prepareStatement(activePoliciesSql);
@@ -193,6 +194,7 @@ public class InsurancePage {
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 IPlblnumberofClaims.setText(String.valueOf(rs.getInt(1)));
+                IPlblpendingClaims.setText("Pending: " + rs.getInt(1));
             }
             rs.close();
             pstmt.close();
@@ -235,9 +237,11 @@ public class InsurancePage {
         IPlblTotalPayout.setText("R 0.00");
     }
 
-    private void loadRecentPoliciesAndClaims() {
+    private void loadAllPolicies() {
+        allPoliciesList.clear();
         policiesList.clear();
-        try (Connection conn = ConnectionDB.getInsuranceConnection()) {
+
+        try (Connection conn = ConnectionDB.getConnection()) {
             // Query to get combined policy and claim data
             String sql = "SELECT ip.policy_id, ip.policy_number, ip.start_date, ip.end_date, ip.insurance_company, " +
                     "v.registration_number as vehicle_number, c.name as customer_name, " +
@@ -246,7 +250,7 @@ public class InsurancePage {
                     "JOIN Vehicle v ON ip.vehicle_id = v.vehicle_id " +
                     "JOIN Customer c ON v.owner_id = c.customer_id " +
                     "LEFT JOIN Claim cl ON ip.policy_id = cl.policy_id " +
-                    "ORDER BY ip.start_date DESC LIMIT 20";
+                    "ORDER BY ip.start_date DESC";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -263,6 +267,7 @@ public class InsurancePage {
                         rs.getString("claim_status") != null ? rs.getString("claim_status") : "Active",
                         rs.getString("insurance_company")
                 );
+                allPoliciesList.add(data);
                 policiesList.add(data);
             }
             rs.close();
@@ -280,6 +285,9 @@ public class InsurancePage {
             IPtableview.setItems(policiesList);
             IPtableview.refresh();
 
+            // Update recent claims label
+            IPlblRecentClaims.setText("Policies & Claims (" + policiesList.size() + ")");
+
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load policies: " + e.getMessage());
@@ -288,57 +296,29 @@ public class InsurancePage {
 
     private void searchPolicies(String searchText) {
         policiesList.clear();
-        try (Connection conn = ConnectionDB.getInsuranceConnection()) {
-            String sql = "SELECT ip.policy_id, ip.policy_number, ip.start_date, ip.end_date, ip.insurance_company, " +
-                    "v.registration_number as vehicle_number, c.name as customer_name, " +
-                    "cl.claim_id, cl.claim_amount, cl.status as claim_status, cl.claim_date " +
-                    "FROM InsurancePolicy ip " +
-                    "JOIN Vehicle v ON ip.vehicle_id = v.vehicle_id " +
-                    "JOIN Customer c ON v.owner_id = c.customer_id " +
-                    "LEFT JOIN Claim cl ON ip.policy_id = cl.policy_id " +
-                    "WHERE v.registration_number ILIKE ? OR c.name ILIKE ? OR ip.policy_number ILIKE ? " +
-                    "ORDER BY ip.start_date DESC";
+        String searchLower = searchText.toLowerCase();
 
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            String searchPattern = "%" + searchText + "%";
-            pstmt.setString(1, searchPattern);
-            pstmt.setString(2, searchPattern);
-            pstmt.setString(3, searchPattern);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                InsuranceData data = new InsuranceData(
-                        rs.getInt("policy_id"),
-                        rs.getString("policy_number"),
-                        rs.getString("vehicle_number"),
-                        rs.getString("customer_name"),
-                        rs.getDate("start_date") != null ? rs.getDate("start_date").toLocalDate() : null,
-                        rs.getDate("end_date") != null ? rs.getDate("end_date").toLocalDate() : null,
-                        rs.getDouble("claim_amount"),
-                        rs.getString("claim_status") != null ? rs.getString("claim_status") : "Active",
-                        rs.getString("insurance_company")
-                );
+        for (InsuranceData data : allPoliciesList) {
+            if (data.getPolicyNumber().toLowerCase().contains(searchLower) ||
+                    data.getVehicleNumber().toLowerCase().contains(searchLower) ||
+                    data.getCustomerName().toLowerCase().contains(searchLower) ||
+                    data.getInsuranceCompany().toLowerCase().contains(searchLower)) {
                 policiesList.add(data);
             }
-            rs.close();
-            pstmt.close();
-            IPtableview.setItems(policiesList);
-            IPtableview.refresh();
+        }
 
-            if (policiesList.isEmpty()) {
-                showAlert(Alert.AlertType.INFORMATION, "No Results", "No policies found matching: " + searchText);
-            }
+        IPtableview.setItems(policiesList);
+        IPtableview.refresh();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to search policies: " + e.getMessage());
+        if (policiesList.isEmpty()) {
+            showAlert(Alert.AlertType.INFORMATION, "No Results", "No policies found matching: " + searchText);
         }
     }
 
     @FXML
     void onclickDashboardIP(ActionEvent event) {
         loadDashboardStats();
-        loadRecentPoliciesAndClaims();
+        loadAllPolicies();
         showAlert(Alert.AlertType.INFORMATION, "Dashboard", "Dashboard refreshed");
     }
 
@@ -385,7 +365,9 @@ public class InsurancePage {
         if (!searchText.isEmpty()) {
             searchPolicies(searchText);
         } else {
-            loadRecentPoliciesAndClaims();
+            policiesList.setAll(allPoliciesList);
+            IPtableview.setItems(policiesList);
+            IPtableview.refresh();
         }
     }
 

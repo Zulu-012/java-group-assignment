@@ -133,7 +133,7 @@ public class PoliciesAndClaims {
             return;
         }
 
-        try (Connection conn = ConnectionDB.getInsuranceConnection()) {
+        try (Connection conn = ConnectionDB.getConnection()) {
             // Get vehicle_id from registration number
             String vehicleSql = "SELECT vehicle_id FROM Vehicle WHERE registration_number = ?";
             PreparedStatement vehicleStmt = conn.prepareStatement(vehicleSql);
@@ -143,6 +143,11 @@ public class PoliciesAndClaims {
             int vehicleId = 1;
             if (rs.next()) {
                 vehicleId = rs.getInt("vehicle_id");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Vehicle not found with registration number: " + vehicleNumber);
+                rs.close();
+                vehicleStmt.close();
+                return;
             }
             rs.close();
             vehicleStmt.close();
@@ -187,40 +192,61 @@ public class PoliciesAndClaims {
 
     @FXML
     void onclickmakeclaim(ActionEvent event) {
-        String claimId = PCtxtClaimID.getText();
         String vehicleNumber = PCtxtVehiclenumber.getText();
         String policyNumber = PCtxtpolicyNumber.getText();
         LocalDate claimDate = PCTxtDate.getValue();
         String amount = PCtxtamount.getText();
 
         if (vehicleNumber.isEmpty() || policyNumber.isEmpty() || claimDate == null || amount.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please fill all required fields!");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please fill all required fields: Vehicle Number, Policy Number, Date, and Amount!");
             return;
         }
 
-        try (Connection conn = ConnectionDB.getInsuranceConnection()) {
-            // Get policy_id from policy number
-            String policySql = "SELECT policy_id FROM InsurancePolicy WHERE policy_number = ?";
+        // Validate amount
+        double claimAmount;
+        try {
+            claimAmount = Double.parseDouble(amount);
+            if (claimAmount <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Amount must be greater than 0!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please enter a valid amount!");
+            return;
+        }
+
+        try (Connection conn = ConnectionDB.getConnection()) {
+            // First verify policy exists and get policy_id
+            String policySql = "SELECT ip.policy_id, v.registration_number FROM InsurancePolicy ip " +
+                    "JOIN Vehicle v ON ip.vehicle_id = v.vehicle_id " +
+                    "WHERE ip.policy_number = ? AND v.registration_number = ?";
             PreparedStatement policyStmt = conn.prepareStatement(policySql);
             policyStmt.setString(1, policyNumber);
+            policyStmt.setString(2, vehicleNumber);
             ResultSet rs = policyStmt.executeQuery();
 
-            int policyId = 1;
+            int policyId = -1;
             if (rs.next()) {
                 policyId = rs.getInt("policy_id");
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Policy not found! Please check Policy Number and Vehicle Number.");
+                rs.close();
+                policyStmt.close();
+                return;
             }
             rs.close();
             policyStmt.close();
 
+            // Insert claim
             String sql = "INSERT INTO Claim (policy_id, claim_date, claim_amount, status) VALUES (?, ?, ?, 'Pending')";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, policyId);
             pstmt.setDate(2, java.sql.Date.valueOf(claimDate));
-            pstmt.setBigDecimal(3, new java.math.BigDecimal(amount));
+            pstmt.setBigDecimal(3, new java.math.BigDecimal(claimAmount));
 
             int result = pstmt.executeUpdate();
             if (result > 0) {
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Claim submitted successfully!");
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Claim submitted successfully! Claim ID will be generated automatically.");
                 clearClaimFields();
                 PClblClaimStatus.setText("Status: Submitted ✓");
             }

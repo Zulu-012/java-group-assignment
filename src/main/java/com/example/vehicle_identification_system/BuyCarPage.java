@@ -153,8 +153,6 @@ public class BuyCarPage {
     private String loggedInUserEmail = "";
     private ObservableList<VehicleData> vehicleList = FXCollections.observableArrayList();
     private ObservableList<VehicleData> filteredList = FXCollections.observableArrayList();
-
-    // Filter variables
     private String selectedMake = "";
     private String selectedModel = "";
     private Double minPrice = null;
@@ -185,22 +183,18 @@ public class BuyCarPage {
     }
 
     private void setupFilters() {
-        // Setup Make dropdown
         dropdownMake1.setText("Toyota");
         dropDownmake2.setText("Honda");
         dropdownMake1.setOnAction(e -> selectMake("Toyota"));
         dropDownmake2.setOnAction(e -> selectMake("Honda"));
 
-        // Add more makes dynamically from database
         loadMakesFromDatabase();
 
-        // Setup Model dropdown
         dropdownmodel1.setText("Camry");
         dropdownMoodel2.setText("Civic");
         dropdownmodel1.setOnAction(e -> selectModel("Camry"));
         dropdownMoodel2.setOnAction(e -> selectModel("Civic"));
 
-        // Setup Price filters
         dropdownminprice1.setText("R0");
         dropdownminprice2.setText("R50,000");
         dropdownminprice1.setOnAction(e -> selectMinPrice(0));
@@ -218,10 +212,7 @@ public class BuyCarPage {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 
-            // Clear existing items except first two
             dropdownAllMakes.getItems().clear();
-
-            // Add "All Makes" option
             MenuItem allMakes = new MenuItem("All Makes");
             allMakes.setOnAction(e -> {
                 selectedMake = "";
@@ -247,8 +238,6 @@ public class BuyCarPage {
         this.selectedMake = make;
         dropdownAllMakes.setText(make);
         applyFilters();
-
-        // Load models for selected make
         loadModelsForMake(make);
     }
 
@@ -260,7 +249,6 @@ public class BuyCarPage {
             ResultSet rs = pstmt.executeQuery();
 
             dropdownAllmodel.getItems().clear();
-
             MenuItem allModels = new MenuItem("All Models");
             allModels.setOnAction(e -> {
                 selectedModel = "";
@@ -333,7 +321,6 @@ public class BuyCarPage {
             rs.close();
             pstmt.close();
 
-            // Set up table columns
             colunmid.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
             columnRegistrationNumber.setCellValueFactory(new PropertyValueFactory<>("registrationNumber"));
             columnMake.setCellValueFactory(new PropertyValueFactory<>("make"));
@@ -354,20 +341,16 @@ public class BuyCarPage {
 
     private void applyFilters() {
         filteredList.clear();
-
         for (VehicleData vehicle : vehicleList) {
             boolean matchesMake = selectedMake.isEmpty() || vehicle.getMake().equalsIgnoreCase(selectedMake);
             boolean matchesModel = selectedModel.isEmpty() || vehicle.getModel().equalsIgnoreCase(selectedModel);
             boolean matchesMinPrice = minPrice == null || vehicle.getPrice() >= minPrice;
             boolean matchesMaxPrice = maxPrice == null || vehicle.getPrice() <= maxPrice;
-
             if (matchesMake && matchesModel && matchesMinPrice && matchesMaxPrice) {
                 filteredList.add(vehicle);
             }
         }
-
         tableview.setItems(filteredList);
-
         if (filteredList.isEmpty()) {
             showAlert(Alert.AlertType.INFORMATION, "No Results", "No vehicles match your filters");
         }
@@ -376,7 +359,6 @@ public class BuyCarPage {
     private void searchVehicles(String searchText) {
         filteredList.clear();
         String searchLower = searchText.toLowerCase();
-
         for (VehicleData vehicle : vehicleList) {
             if (vehicle.getMake().toLowerCase().contains(searchLower) ||
                     vehicle.getModel().toLowerCase().contains(searchLower) ||
@@ -384,9 +366,7 @@ public class BuyCarPage {
                 filteredList.add(vehicle);
             }
         }
-
         tableview.setItems(filteredList);
-
         if (filteredList.isEmpty()) {
             showAlert(Alert.AlertType.INFORMATION, "No Results", "No vehicles match your search: " + searchText);
         }
@@ -399,23 +379,17 @@ public class BuyCarPage {
             showAlert(Alert.AlertType.WARNING, "No Selection", "Please select a vehicle to purchase");
             return;
         }
-
-        // Show email dialog to contact seller
         showEmailDialog(selectedVehicle);
     }
 
     private void showEmailDialog(VehicleData vehicle) {
-        // Create a dialog for email
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Contact Seller");
-        dialog.setHeaderText("Contact seller about: " + vehicle.getMake() + " " + vehicle.getModel() +
-                " (" + vehicle.getRegistrationNumber() + ")");
+        dialog.setHeaderText("Contact seller about: " + vehicle.getMake() + " " + vehicle.getModel());
 
-        // Set the button types
         ButtonType sendButtonType = new ButtonType("Send Email", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(sendButtonType, ButtonType.CANCEL);
 
-        // Create the content
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -427,14 +401,11 @@ public class BuyCarPage {
 
         TextField subjectField = new TextField();
         subjectField.setText("Interest in your vehicle: " + vehicle.getMake() + " " + vehicle.getModel());
-        subjectField.setPrefWidth(400);
 
         TextArea messageArea = new TextArea();
         messageArea.setPrefRowCount(5);
         messageArea.setPrefWidth(400);
-        messageArea.setPromptText("Write your message here...\n\nHello,\n\nI am interested in purchasing your " +
-                vehicle.getMake() + " " + vehicle.getModel() +
-                ". Could you please provide more information?\n\nRegards,\n" + loggedInUser);
+        messageArea.setPromptText("Write your message here...");
 
         grid.add(new Label("To:"), 0, 0);
         grid.add(toField, 1, 0);
@@ -444,8 +415,6 @@ public class BuyCarPage {
         grid.add(messageArea, 1, 2);
 
         dialog.getDialogPane().setContent(grid);
-
-        // Convert the result
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == sendButtonType) {
                 return subjectField.getText() + "|" + messageArea.getText();
@@ -454,7 +423,6 @@ public class BuyCarPage {
         });
 
         Optional<String> result = dialog.showAndWait();
-
         result.ifPresent(data -> {
             String[] parts = data.split("\\|", 2);
             String subject = parts[0];
@@ -464,7 +432,6 @@ public class BuyCarPage {
     }
 
     private void sendEmail(String toEmail, String subject, String message, VehicleData vehicle) {
-        // This opens the default email client
         try {
             String emailBody = message + "\n\n--- Vehicle Details ---\n" +
                     "Registration: " + vehicle.getRegistrationNumber() + "\n" +
@@ -474,27 +441,15 @@ public class BuyCarPage {
                     "Price: R" + String.format("%,.2f", vehicle.getPrice()) + "\n\n" +
                     "From: " + loggedInUser + " (" + loggedInUserEmail + ")";
 
-            // Encode for mailto URL
             String encodedSubject = java.net.URLEncoder.encode(subject, "UTF-8");
             String encodedBody = java.net.URLEncoder.encode(emailBody, "UTF-8");
-
             String mailtoUrl = "mailto:" + toEmail + "?subject=" + encodedSubject + "&body=" + encodedBody;
-
-            // Open default email client
             java.awt.Desktop.getDesktop().mail(new java.net.URI(mailtoUrl));
-
-            showAlert(Alert.AlertType.INFORMATION, "Email Client", "Your email client has been opened. Please send the email to contact the seller.");
-
-            // Also store inquiry in database
+            showAlert(Alert.AlertType.INFORMATION, "Email Client", "Your email client has been opened.");
             saveInquiryToDatabase(vehicle, message);
-
         } catch (Exception e) {
-            // If mailto fails, show email details
             showAlert(Alert.AlertType.INFORMATION, "Contact Seller",
-                    "Please contact the seller directly at:\n\n" +
-                            "Seller Email: " + toEmail + "\n" +
-                            "Subject: " + subject + "\n\n" +
-                            "Message: " + message);
+                    "Please contact the seller directly at:\n\nSeller Email: " + toEmail);
         }
     }
 
@@ -526,6 +481,23 @@ public class BuyCarPage {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void OnclickMainDashboard(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/vehicle_identification_system/CustomerPage.fxml"));
+            Parent root = loader.load();
+            CustomerPage customerPage = loader.getController();
+            customerPage.setLoggedInUser(loggedInUser);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Customer Dashboard");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Could not load Customer Dashboard");
         }
     }
 
@@ -564,7 +536,7 @@ public class BuyCarPage {
     @FXML
     void OnclickSupport(ActionEvent event) {
         showAlert(Alert.AlertType.INFORMATION, "Customer Support",
-                "Contact us: support@vehicleid.com\nPhone: +27 123 456 789\nEmail: help@vehicleid.com");
+                "Contact us: support@vehicleid.com\nPhone: +27 123 456 789");
     }
 
     @FXML

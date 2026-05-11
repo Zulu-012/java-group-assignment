@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vehicle_identification_system.BuyCarPage">
    <children>
-      <ScrollPane fx:id="mainScrollPane" layoutX="99.0" layoutY="88.0" prefHeight="800.0" prefWidth="1270.0" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane fx:id="mainScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="99.0" layoutY="88.0" prefHeight="800.0" prefWidth="1270.0" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <Pane fx:id="root" prefHeight="900.0" prefWidth="1270.0" style="-fx-background-color: linear-gradient(to right, #050608, #0B4F00);;">
                <children>
@@ -33,50 +33,50 @@
                               <Font name="Ebrima Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnBuyCar" layoutX="11.0" layoutY="87.0" mnemonicParsing="false" onAction="#OnclickBuyCar" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Buy a car" textFill="#f4ebeb">
+                        <Button fx:id="btnBuyCar" layoutX="8.0" layoutY="142.0" mnemonicParsing="false" onAction="#OnclickBuyCar" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Buy a car" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
                            <effect>
-                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
                                  <color>
-                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                    <Color red="0.9385964870452881" green="0.9038336873054504" blue="0.9038336873054504" />
                                  </color>
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="btnSellCar" layoutX="11.0" layoutY="142.0" mnemonicParsing="false" onAction="#OnclickSellCar" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Sell a car" textFill="#f4ebeb">
+                        <Button fx:id="btnSellCar" layoutX="8.0" layoutY="197.0" mnemonicParsing="false" onAction="#OnclickSellCar" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Sell a car" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
                            <effect>
-                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
                                  <color>
-                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                    <Color red="0.9035087823867798" green="0.8784112930297852" blue="0.8784112930297852" />
                                  </color>
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="btnMyVehicle" layoutX="11.0" layoutY="196.0" mnemonicParsing="false" onAction="#OnclickMyVehicle" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="My Vehicles" textFill="#f4ebeb">
+                        <Button fx:id="btnMyVehicle" layoutX="8.0" layoutY="251.0" mnemonicParsing="false" onAction="#OnclickMyVehicle" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="My Vehicles" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
                            <effect>
-                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
                                  <color>
-                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                    <Color red="0.8947368264198303" green="0.8671215176582336" blue="0.8671215176582336" />
                                  </color>
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="btnLogout" layoutX="11.0" layoutY="252.0" mnemonicParsing="false" onAction="#OnclickLogout" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Log Out" textFill="#f4ebeb">
+                        <Button fx:id="btnLogout" layoutX="8.0" layoutY="307.0" mnemonicParsing="false" onAction="#OnclickLogout" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Log Out" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
                            <effect>
-                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
                                  <color>
-                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                    <Color red="0.9649122953414917" green="0.9321529269218445" blue="0.9321529269218445" />
                                  </color>
                               </DropShadow>
                            </effect>
@@ -107,6 +107,18 @@
                               </Label>
                            </children>
                         </Pane>
+                        <Button fx:id="btnMainDashboard" layoutX="8.0" layoutY="86.0" mnemonicParsing="false" onAction="#OnclickMainDashboard" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Main Dashboard" textFill="#f4ebeb">
+                           <font>
+                              <Font name="Arial Black" size="16.0" />
+                           </font>
+                           <effect>
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
+                                 <color>
+                                    <Color red="0.9385964870452881" green="0.9038336873054504" blue="0.9038336873054504" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Button>
                      </children>
                   </Pane>
                   <TextField fx:id="txtSearch" layoutX="443.0" layoutY="15.0" prefHeight="39.0" prefWidth="507.0" promptText="🔍 Search make, model,prices" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 10; -fx-border-color: green; -fx-border-radius: 10;">
@@ -198,6 +210,13 @@
                      <font>
                         <Font name="Arial Black" size="16.0" />
                      </font>
+                     <effect>
+                        <DropShadow height="12.24" radius="3.9175000000000004" spread="0.02" width="5.43">
+                           <color>
+                              <Color red="0.9298245906829834" green="0.9154754281044006" blue="0.9154754281044006" />
+                           </color>
+                        </DropShadow>
+                     </effect>
                   </Button>
                </children>
             </Pane>

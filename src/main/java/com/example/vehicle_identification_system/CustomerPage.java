@@ -141,6 +141,8 @@ public class CustomerPage {
     private String loggedInUser = "";
     private int customerId = 0;
     private ObservableList<VehicleData> vehicleList = FXCollections.observableArrayList();
+    private int currentPage = 0;
+    private int itemsPerPage = 10;
 
     public void setLoggedInUser(String username) {
         this.loggedInUser = username;
@@ -219,11 +221,41 @@ public class CustomerPage {
             columnInsuranceStatusCS.setCellValueFactory(new PropertyValueFactory<>("insuranceStatus"));
             columnStatusCS.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-            tableviewCS.setItems(vehicleList);
+            // Apply pagination
+            applyPagination();
+
+            // Show total count
+            lblSearch.setText("Found " + vehicleList.size() + " vehicles available");
 
         } catch (SQLException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to load vehicles: " + e.getMessage());
+        }
+    }
+
+    private void applyPagination() {
+        int fromIndex = currentPage * itemsPerPage;
+        int toIndex = Math.min(fromIndex + itemsPerPage, vehicleList.size());
+
+        if (fromIndex < vehicleList.size()) {
+            ObservableList<VehicleData> pageList = FXCollections.observableArrayList(vehicleList.subList(fromIndex, toIndex));
+            tableviewCS.setItems(pageList);
+        } else {
+            tableviewCS.setItems(FXCollections.observableArrayList());
+        }
+    }
+
+    private void nextPage() {
+        if ((currentPage + 1) * itemsPerPage < vehicleList.size()) {
+            currentPage++;
+            applyPagination();
+        }
+    }
+
+    private void previousPage() {
+        if (currentPage > 0) {
+            currentPage--;
+            applyPagination();
         }
     }
 
@@ -264,7 +296,9 @@ public class CustomerPage {
             rs.close();
             pstmt.close();
 
-            tableviewCS.setItems(vehicleList);
+            currentPage = 0;
+            applyPagination();
+            lblSearch.setText("Found " + vehicleList.size() + " vehicles matching '" + searchText + "'");
 
             if (vehicleList.isEmpty()) {
                 showAlert(Alert.AlertType.INFORMATION, "No Results", "No vehicles found matching: " + searchText);
@@ -347,6 +381,7 @@ public class CustomerPage {
         if (!searchText.isEmpty()) {
             searchVehicles(searchText);
         } else {
+            currentPage = 0;
             loadAvailableVehicles();
         }
     }
@@ -354,6 +389,16 @@ public class CustomerPage {
     @FXML
     void onclickcustomerSupport(ActionEvent event) {
         showAlert(Alert.AlertType.INFORMATION, "Customer Support", "Contact us: support@vehicleid.com\nPhone: +27 123 456 789\nEmail: help@vehicleid.com");
+    }
+
+    @FXML
+    void onNextPage(ActionEvent event) {
+        nextPage();
+    }
+
+    @FXML
+    void onPreviousPage(ActionEvent event) {
+        previousPage();
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {

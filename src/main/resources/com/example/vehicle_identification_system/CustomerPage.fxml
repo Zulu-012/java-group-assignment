@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,21 +15,20 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vehicle_identification_system.CustomerPage">
    <children>
-      <ScrollPane fx:id="mainScrollPane" layoutX="99.0" layoutY="88.0" prefHeight="800.0" prefWidth="1270.0" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane fx:id="mainScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="99.0" layoutY="88.0" prefHeight="800.0" prefWidth="1270.0" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <Pane fx:id="root" prefHeight="850.0" prefWidth="1270.0" style="-fx-background-color: linear-gradient(to right, #050608, #0B4F00);;">
+            <Pane fx:id="root" prefHeight="900.0" prefWidth="1270.0" style="-fx-background-color: linear-gradient(to right, #050608, #0B4F00);;">
                <children>
                   <Pane fx:id="CPsidenavigation" prefHeight="800.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green;">
                      <children>
-                        <Label fx:id="CSlbvehicleId" layoutX="14.0" layoutY="14.0" text="Vehicle Idefication" textFill="#e4dede">
+                        <Label fx:id="CSlbvehicleId" layoutX="14.0" layoutY="14.0" text="Vehicle Identification" textFill="#e4dede">
                            <font>
                               <Font name="Ebrima Bold" size="19.0" />
                            </font>
@@ -37,7 +38,7 @@
                               <Font name="Ebrima Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Button fx:id="CSbtnbuycar" layoutX="11.0" layoutY="87.0" mnemonicParsing="false" onAction="#OnclickBuyCarCS" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Buy a car" textFill="#f4ebeb">
+                        <Button fx:id="CSbtnbuycar" layoutX="11.0" layoutY="87.0" mnemonicParsing="false" onAction="#OnclickBuyCarCS" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5;" text="Buy a car" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
@@ -49,7 +50,7 @@
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="CSsellcar" layoutX="11.0" layoutY="142.0" mnemonicParsing="false" onAction="#OnclickseellcarCS" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Sell a car" textFill="#f4ebeb">
+                        <Button fx:id="CSsellcar" layoutX="11.0" layoutY="142.0" mnemonicParsing="false" onAction="#OnclickseellcarCS" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5;" text="Sell a car" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
@@ -61,7 +62,7 @@
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="CSmyvehicle" layoutX="11.0" layoutY="196.0" mnemonicParsing="false" onAction="#onclicMyvehicleCS" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="My Vehicles" textFill="#f4ebeb">
+                        <Button fx:id="CSmyvehicle" layoutX="11.0" layoutY="196.0" mnemonicParsing="false" onAction="#onclicMyvehicleCS" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5;" text="My Vehicles" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
@@ -73,7 +74,7 @@
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Button fx:id="btnlogoutCS" layoutX="11.0" layoutY="252.0" mnemonicParsing="false" onAction="#onclickLogout" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);" text="Log Out" textFill="#f4ebeb">
+                        <Button fx:id="btnlogoutCS" layoutX="11.0" layoutY="252.0" mnemonicParsing="false" onAction="#onclickLogout" prefHeight="47.0" prefWidth="185.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: red; -fx-border-radius: 5;" text="Log Out" textFill="#f4ebeb">
                            <font>
                               <Font name="Arial Black" size="16.0" />
                            </font>
@@ -85,7 +86,7 @@
                               </DropShadow>
                            </effect>
                         </Button>
-                        <Pane fx:id="paneCustmer" layoutX="14.0" layoutY="632.0" prefHeight="136.0" prefWidth="166.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
+                        <Pane fx:id="paneCustmer" layoutX="14.0" layoutY="700.0" prefHeight="136.0" prefWidth="166.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
                            <children>
                               <Button fx:id="btnCustomerSupport" layoutX="9.0" layoutY="75.0" mnemonicParsing="false" onAction="#onclickcustomerSupport" prefHeight="47.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5; -fx-background-radius: 5;" text="Customer Support" textFill="#f4ebeb">
                                  <font>
@@ -113,45 +114,32 @@
                         </Pane>
                      </children>
                   </Pane>
+
                   <ImageView fx:id="imageBackground" fitHeight="528.0" fitWidth="1071.0" layoutX="200.0" layoutY="-50.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@rover.jpg" />
-                     </image>
+                     <Image url="@rover.jpg" />
                   </ImageView>
-                  <TextField fx:id="txtSearchCS" layoutX="443.0" layoutY="15.0" prefHeight="39.0" prefWidth="507.0" promptText="🔍 Search make, model,prices" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 10; -fx-border-color: green; -fx-border-radius: 10;">
+
+                  <TextField fx:id="txtSearchCS" layoutX="443.0" layoutY="15.0" prefHeight="39.0" prefWidth="507.0" promptText="🔍 Search make, model, prices" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 10; -fx-border-color: green; -fx-border-radius: 10;">
                      <font>
                         <Font name="Arial Black" size="17.0" />
                      </font>
                   </TextField>
-                  <Label fx:id="lblfind" layoutX="213.0" layoutY="69.0" prefHeight="73.0" prefWidth="315.0" text="FIND YOUR " textFill="#f4f1f1">
+
+                  <Label fx:id="lblfind" layoutX="220.0" layoutY="69.0" prefHeight="73.0" prefWidth="315.0" text="FIND YOUR " textFill="#f4f1f1">
                      <font>
                         <Font name="Arial Black" size="46.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblperfectcar" layoutX="213.0" layoutY="124.0" prefHeight="73.0" prefWidth="369.0" text="PERFECT CAR">
+
+                  <Label fx:id="lblperfectcar" layoutX="220.0" layoutY="124.0" prefHeight="73.0" prefWidth="369.0" text="PERFECT CAR" textFill="#4CAF50">
                      <font>
                         <Font name="Arial Black" size="46.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="1.0" endY="1.0" startX="1.0" startY="0.5899053868435159">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.2410656213760376" green="0.9298245906829834" blue="0.011479315347969532" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.9137254953384399" green="0.9372549057006836" blue="0.9137254953384399" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
                   </Label>
+
                   <Pane fx:id="paneCustomer" layoutX="1041.0" layoutY="15.0" prefHeight="53.0" prefWidth="157.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
                      <children>
-                        <Label fx:id="lblNameCS" layoutX="9.0" layoutY="4.0" prefHeight="20.0" prefWidth="134.0" text="name" textFill="#f6f2f2">
+                        <Label fx:id="lblNameCS" layoutX="9.0" layoutY="4.0" prefHeight="20.0" prefWidth="134.0" text="Guest" textFill="#f6f2f2">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
@@ -163,78 +151,81 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Label fx:id="lblSearch" layoutX="213.0" layoutY="197.0" prefHeight="24.0" prefWidth="369.0" text="Search, compare and buy the best vehicle" textFill="#f4f1f1">
+
+                  <Label fx:id="lblSearch" layoutX="220.0" layoutY="197.0" prefHeight="24.0" prefWidth="369.0" text="Search, compare and buy the best vehicle" textFill="#f4f1f1">
                      <font>
                         <Font name="Arial Black" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblWithconfidence" layoutX="213.0" layoutY="221.0" prefHeight="24.0" prefWidth="369.0" text="with confidence" textFill="#f4f1f1">
+                  <Label fx:id="lblWithconfidence" layoutX="220.0" layoutY="221.0" prefHeight="24.0" prefWidth="369.0" text="with confidence" textFill="#f4f1f1">
                      <font>
                         <Font name="Arial Black" size="16.0" />
                      </font>
                   </Label>
-                  <Pane fx:id="panefilterCS" layoutX="213.0" layoutY="380.0" prefHeight="60.0" prefWidth="988.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
+
+                  <Pane fx:id="panefilterCS" layoutX="220.0" layoutY="260.0" prefHeight="60.0" prefWidth="769.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-background-radius: 8; -fx-border-color: green; -fx-border-radius: 8;">
                      <children>
-                        <MenuButton fx:id="dropdownAllmakes" layoutX="23.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="174.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5;" text="All Makes" textFill="#f8f3f3">
+                        <MenuButton fx:id="dropdownAllmakes" layoutX="10.0" layoutY="12.0" prefHeight="36.0" prefWidth="150.0" style="-fx-background-color: #1a1a1a; -fx-border-color: green; -fx-border-radius: 5;" text="All Makes" textFill="#fbf6f6">
                            <items>
-                              <MenuItem fx:id="dropdownmakeCS" mnemonicParsing="false" text="Action 1" />
-                              <MenuItem fx:id="dropdownMake2CS" mnemonicParsing="false" text="Action 2" />
+                              <MenuItem text="Toyota" />
+                              <MenuItem text="Honda" />
+                              <MenuItem text="Ford" />
                            </items>
-                           <font>
-                              <Font name="Arial Black" size="15.0" />
-                           </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropdownModelCS" layoutX="208.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="174.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5;" text="All model" textFill="#f8f3f3">
+                        <MenuButton fx:id="dropdownModelCS" layoutX="170.0" layoutY="12.0" prefHeight="36.0" prefWidth="150.0" style="-fx-background-color: #1a1a1a; -fx-border-color: green; -fx-border-radius: 5;" text="All Models" textFill="#dbd6d6">
                            <items>
-                              <MenuItem fx:id="dropdownmodel1CS" mnemonicParsing="false" text="Action 1" />
-                              <MenuItem fx:id="dropdownmodel2CS" mnemonicParsing="false" text="Action 2" />
+                              <MenuItem text="Camry" />
+                              <MenuItem text="Civic" />
+                              <MenuItem text="Mustang" />
                            </items>
-                           <font>
-                              <Font name="Arial Black" size="15.0" />
-                           </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropdownminpriceCS" layoutX="392.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="174.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5;" text="Min Price" textFill="#f8f3f3">
+                        <MenuButton fx:id="dropdownminpriceCS" layoutX="330.0" layoutY="12.0" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: #1a1a1a; -fx-border-color: green; -fx-border-radius: 5;" text="Min Price" textFill="#f2ebeb">
                            <items>
-                              <MenuItem fx:id="dropdownminprice1CS" mnemonicParsing="false" text="Action 1" />
-                              <MenuItem fx:id="dropdownminprice2CS" mnemonicParsing="false" text="Action 2" />
+                              <MenuItem text="R5,000" />
+                              <MenuItem text="R10,000" />
+                              <MenuItem text="R20,000" />
                            </items>
-                           <font>
-                              <Font name="Arial Black" size="15.0" />
-                           </font>
                         </MenuButton>
-                        <MenuButton fx:id="dropdownmaxpriceCS" layoutX="578.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="174.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00); -fx-border-color: green; -fx-border-radius: 5;" text="Max Price" textFill="#f8f3f3">
+                        <MenuButton fx:id="dropdownmaxpriceCS" layoutX="460.0" layoutY="12.0" prefHeight="36.0" prefWidth="120.0" style="-fx-background-color: #1a1a1a; -fx-border-color: green; -fx-border-radius: 5;" text="Max Price" textFill="#f6f1f1">
                            <items>
-                              <MenuItem fx:id="dropdownmaxprice1CS" mnemonicParsing="false" text="Action 1" />
-                              <MenuItem fx:id="dropdownmaxprice2CS" mnemonicParsing="false" text="Action 2" />
+                              <MenuItem text="R30,000" />
+                              <MenuItem text="R50,000" />
+                              <MenuItem text="R100,000" />
                            </items>
-                           <font>
-                              <Font name="Arial Black" size="15.0" />
-                           </font>
                         </MenuButton>
-                        <Button fx:id="btnSearchVehicleCS" layoutX="778.0" layoutY="12.0" mnemonicParsing="false" onAction="#onclickSearchCS" prefHeight="36.0" prefWidth="185.0" style="-fx-background-color: #0B4F00;" text="🔍 Search Vehicle" textFill="#e9efe9">
-                           <font>
-                              <Font name="Arial Black" size="14.0" />
-                           </font>
+                        <Button fx:id="btnSearchVehicleCS" layoutX="600.0" layoutY="10.0" mnemonicParsing="false" onAction="#onclickSearchCS" prefHeight="36.0" prefWidth="150.0" style="-fx-background-color: #0B4F00; -fx-background-radius: 5;" text="🔍 Search Vehicle" textFill="#ebebeb">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
                      </children>
                   </Pane>
-                  <TableView fx:id="tableviewCS" layoutX="213.0" layoutY="446.0" prefHeight="353.0" prefWidth="1042.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);">
+
+                  <!-- Progress Indicators -->
+                  <ProgressBar fx:id="loadingProgressBar" layoutX="220.0" layoutY="335.0" prefWidth="300.0" visible="false" />
+                  <ProgressIndicator fx:id="loadingIndicator" layoutX="550.0" layoutY="325.0" visible="false" />
+
+                  <TableView fx:id="tableviewCS" layoutX="220.0" layoutY="350.0" prefHeight="450.0" prefWidth="1020.0" style="-fx-background-color: linear-gradient(to bottom right, #050608, #0A0D0F, #0B4F00);">
                      <columns>
-                        <TableColumn fx:id="columnIDCS" prefWidth="36.666656494140625" style="-fx-background-color: green;" text="#" />
-                        <TableColumn fx:id="colunmRegistrationNumberCS" prefWidth="188.6666717529297" style="-fx-background-color: green;" text="Registration Number" />
-                        <TableColumn fx:id="columnMakeCS" prefWidth="118.66665649414062" style="-fx-background-color: green;" text="Make" />
-                        <TableColumn fx:id="columnModelCS" prefWidth="118.66665649414062" style="-fx-background-color: green;" text="Model" />
-                        <TableColumn fx:id="columnYearCS" prefWidth="83.99993896484375" style="-fx-background-color: green;" text="Year" />
-                        <TableColumn fx:id="columnOwnerNameCS" prefWidth="176.0" style="-fx-background-color: green;" text="Owner Name" />
-                        <TableColumn fx:id="columnInsuranceStatusCS" prefWidth="119.333251953125" style="-fx-background-color: green;" text="Insurance Status" />
-                        <TableColumn fx:id="columnStatusCS" prefWidth="107.333251953125" style="-fx-background-color: green;" text="Status" />
-                        <TableColumn fx:id="columnActionCS" prefWidth="107.333251953125" style="-fx-background-color: green;" text="Action" />
+                        <TableColumn fx:id="columnIDCS" prefWidth="50.0" style="-fx-background-color: green;" text="#" />
+                        <TableColumn fx:id="colunmRegistrationNumberCS" prefWidth="180.0" style="-fx-background-color: green;" text="Registration Number" />
+                        <TableColumn fx:id="columnMakeCS" prefWidth="120.0" style="-fx-background-color: green;" text="Make" />
+                        <TableColumn fx:id="columnModelCS" prefWidth="120.0" style="-fx-background-color: green;" text="Model" />
+                        <TableColumn fx:id="columnYearCS" prefWidth="80.0" style="-fx-background-color: green;" text="Year" />
+                        <TableColumn fx:id="columnOwnerNameCS" prefWidth="170.0" style="-fx-background-color: green;" text="Owner Name" />
+                        <TableColumn fx:id="columnInsuranceStatusCS" prefWidth="120.0" style="-fx-background-color: green;" text="Insurance Status" />
+                        <TableColumn fx:id="columnStatusCS" prefWidth="100.0" style="-fx-background-color: green;" text="Status" />
+                        <TableColumn fx:id="columnActionCS" prefWidth="100.0" style="-fx-background-color: green;" text="Action" />
                      </columns>
                   </TableView>
-                  <ScrollBar fx:id="scrollbar" layoutX="1258.0" max="200.0" orientation="VERTICAL" prefHeight="800.0" prefWidth="15.0" visibleAmount="70.0" />
+
+                  <!-- Pagination Controls -->
+                  <HBox layoutX="220.0" layoutY="815.0" spacing="10.0">
+                     <Button onAction="#onPreviousPage" style="-fx-background-color: #0B4F00; -fx-text-fill: white;" text="Previous" />
+                     <Button onAction="#onNextPage" style="-fx-background-color: #0B4F00; -fx-text-fill: white;" text="Next" />
+                  </HBox>
+
+                  <ScrollBar fx:id="scrollbar" layoutX="1258.0" max="200.0" orientation="VERTICAL" prefHeight="800.0" prefWidth="15.0" visible="false" visibleAmount="70.0" />
                </children>
             </Pane>
          </content>

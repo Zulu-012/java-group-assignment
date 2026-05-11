@@ -19,7 +19,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vehicle_identification_system.InsurancePage">
    <children>
-      <ScrollPane fx:id="mainScrollPane" layoutX="99.0" layoutY="88.0" prefHeight="800.0" prefWidth="1270.0" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane fx:id="mainScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="99.0" layoutY="88.0" prefHeight="800.0" prefWidth="1270.0" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <Pane fx:id="root" prefHeight="900.0" prefWidth="1270.0" style="-fx-background-color: linear-gradient(to right, #050608, #0B4F00);;">
                <children>
@@ -40,9 +40,9 @@
                               <Font name="Arial Black" size="16.0" />
                            </font>
                            <effect>
-                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
                                  <color>
-                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                    <Color red="0.9210526347160339" green="0.9039961099624634" blue="0.9039961099624634" />
                                  </color>
                               </DropShadow>
                            </effect>
@@ -52,9 +52,9 @@
                               <Font name="Arial Black" size="16.0" />
                            </font>
                            <effect>
-                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
                                  <color>
-                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                    <Color red="0.9912280440330505" green="0.9759313464164734" blue="0.9759313464164734" />
                                  </color>
                               </DropShadow>
                            </effect>
@@ -64,9 +64,9 @@
                               <Font name="Arial Black" size="16.0" />
                            </font>
                            <effect>
-                              <DropShadow height="3.48" radius="0.37" width="0.0">
+                              <DropShadow height="1.74" radius="0.0" width="0.0">
                                  <color>
-                                    <Color red="0.24561403691768646" green="0.23803335428237915" blue="0.23803335428237915" />
+                                    <Color red="0.9649122953414917" green="0.9321529269218445" blue="0.9321529269218445" />
                                  </color>
                               </DropShadow>
                            </effect>
