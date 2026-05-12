@@ -13,10 +13,10 @@ public class ConnectionDB {
     public static Connection getConnection() throws SQLException {
         try {
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Database connection Successful ✅");
+            System.out.println("Database connection Successful ");
             return conn;
         } catch (SQLException e) {
-            System.err.println("Database connection Failed ❌");
+            System.err.println("Database connection Failed ");
             System.err.println("Error: " + e.getMessage());
             throw e;
         }
@@ -27,7 +27,7 @@ public class ConnectionDB {
         try {
             // Use postgres user for police to avoid permission issues
             Connection conn = DriverManager.getConnection(URL, "postgres", "keahana");
-            System.out.println("Police connection successful ✅");
+            System.out.println("Police connection successful ");
             return conn;
         } catch (SQLException e) {
             System.err.println("Police connection failed: " + e.getMessage());
@@ -39,7 +39,7 @@ public class ConnectionDB {
     public static Connection getInsuranceConnection() throws SQLException {
         try {
             Connection conn = DriverManager.getConnection(URL, "postgres", "keahana");
-            System.out.println("Insurance connection successful ✅");
+            System.out.println("Insurance connection successful ");
             return conn;
         } catch (SQLException e) {
             System.err.println("Insurance connection failed: " + e.getMessage());
